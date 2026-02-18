@@ -5,25 +5,14 @@ and how many of each type of action there are
 and how many goals there are in each game
 """
 
-"""
-Analyze Leverkusen 360 Data - Action Counts
-===========================================
-
-Counts:
-1. Total actions across all 34 matches
-2. Breakdown by action type (pass, shot, dribble, etc.)
-
-"""
 
 import json
 from pathlib import Path
 from collections import Counter
 
-# =============================================================================
-# CONFIGURATION
-# =============================================================================
+#Config
 games_path = Path(r"E:\Masters\EPVProject\working_games")
-EVENTS_PATH = Path(r"E:\Masters\EPVProject\open-data-master\data\events")
+events_path = Path(r"E:\Masters\EPVProject\open-data-master\data\events")
 
 
 def main():
@@ -32,18 +21,12 @@ def main():
     print("Analyzing Leverkusen 360 Data - Action Counts")
     print("=" * 60)
     
-    # -------------------------------------------------------------------------
-    # Get all match IDs from working_games folder
-    # -------------------------------------------------------------------------
+    #Get all match files in working_games folder    
     
     match_files = list(games_path.glob("*.json"))
     match_ids = [f.stem for f in match_files]  # Get filename without .json
     
     print(f"\nFound {len(match_ids)} matches in working_games folder")
-    
-    # -------------------------------------------------------------------------
-    # Load events for each match and count actions
-    # -------------------------------------------------------------------------
     
     total_actions = 0
     action_counts = Counter()  # Counts each action type
@@ -56,7 +39,7 @@ def main():
     for match_id in match_ids:
         
         # Load events file for this match
-        events_file = EVENTS_PATH / f"{match_id}.json"
+        events_file = events_path / f"{match_id}.json"
         
         if not events_file.exists():
             print(f"Match {match_id}: Events file not found!")
@@ -91,10 +74,6 @@ def main():
         
         print(f"Match {match_id}: {match_total} actions")
     
-    # -------------------------------------------------------------------------
-    # Summary
-    # -------------------------------------------------------------------------
-    
     print("\n" + "=" * 60)
     print("SUMMARY")
     print("=" * 60)
@@ -104,11 +83,7 @@ def main():
     print(f"Average actions per match: {total_actions / len(match_action_counts):.0f}")
     print(f"Min actions in a match: {min(match_action_counts):,}")
     print(f"Max actions in a match: {max(match_action_counts):,}")
-    
-    # -------------------------------------------------------------------------
-    # Goals Summary
-    # -------------------------------------------------------------------------
-    
+
     print("\n" + "=" * 60)
     print("GOALS")
     print("=" * 60)
@@ -122,10 +97,6 @@ def main():
     print("\nGoals by team:")
     for team, count in team_goals.most_common():
         print(f"  {team}: {count}")
-    
-    # -------------------------------------------------------------------------
-    # Action Type Breakdown
-    # -------------------------------------------------------------------------
     
     print("\n" + "=" * 60)
     print("ACTION TYPE BREAKDOWN")

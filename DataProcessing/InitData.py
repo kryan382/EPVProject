@@ -16,9 +16,7 @@ import json
 import shutil
 from pathlib import Path
 
-# =============================================================================
-# CONFIGURATION - Update these paths
-# =============================================================================
+#Congif
 file_path = Path(r"E:\Masters\EPVProject\open-data-master\data")
 threesixty_path = file_path / "three-sixty"
 matches_path = file_path / "matches"

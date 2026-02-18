@@ -8,9 +8,7 @@ simple
 import json
 from pathlib import Path
 
-# =============================================================================
-# CONFIGURATION
-# =============================================================================
+#Config
 merged_path = Path(r"E:\Masters\EPVProject\working_games\merged")
 output_path = Path(r"E:\Masters\EPVProject\working_games\labeled")
 

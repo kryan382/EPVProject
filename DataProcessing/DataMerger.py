@@ -5,28 +5,12 @@ so that we can easily analyze them together
 
 This is done using the event_uuid tag 
 """
-"""
-Merge 360 Freeze Frame Data with Events Data
-=============================================
 
-Takes the 360 and events files and merges them into single files.
-Each event gets its freeze_frame and visible_area attached.
-
-Input:
-  - working_games/three-sixty/
-  - working_games/events/
-
-Output:
-  - working_games/merged/
-
-"""
 
 import json
 from pathlib import Path
 
-# =============================================================================
-# CONFIGURATION
-# =============================================================================
+#Config
 working_path = Path(r"E:\Masters\EPVProject\working_games")
 threesixty_path = working_path / "three-sixty"
 events_path = working_path / "events"

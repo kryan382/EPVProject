@@ -1,21 +1,12 @@
 """
-Filter Labeled Data - Keep Only Events with 360 Freeze Frames
-==============================================================
-
-Takes the labeled data and keeps only events that have freeze frame data.
-These are the events we can actually use for the GNN model.
-
-Input:  working_games/labeled/
-Output: working_games/labeled_360/
+Filter out events that dont have 360 data
 
 """
 
 import json
 from pathlib import Path
 
-# =============================================================================
-# CONFIGURATION
-# =============================================================================
+#Config 
 labeled_path = Path(r"E:\Masters\EPVProject\working_games\labeled")
 output_path = Path(r"E:\Masters\EPVProject\working_games\labeled_360")
 
