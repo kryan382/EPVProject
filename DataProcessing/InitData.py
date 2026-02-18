@@ -34,11 +34,8 @@ def main():
     print("Finding Bayer Leverkusen Matches")
     print("=" * 60)
     
-    # -------------------------------------------------------------------------
-    # Step 1: Find Bundesliga 2023/24 competition
-    # -------------------------------------------------------------------------
-    
-    with open(COMPETITIONS_PATH, 'r', encoding='utf-8') as f:
+
+    with open(competitions_path, 'r', encoding='utf-8') as f:
         competitions = json.load(f)
     
     # Look for Bundesliga 2023/24
@@ -57,12 +54,9 @@ def main():
     if comp_id is None:
         print("Could not find Bundesliga 2023/24!")
         return
-    
-    # -------------------------------------------------------------------------
-    # Step 2: Load matches and find Leverkusen games
-    # -------------------------------------------------------------------------
-    
-    matches_file = MATCHES_PATH / str(comp_id) / f"{season_id}.json"
+
+    #Find leverksuen games
+    matches_file = matches_path / str(comp_id) / f"{season_id}.json"
     
     with open(matches_file, 'r', encoding='utf-8') as f:
         matches = json.load(f)
@@ -91,23 +85,20 @@ def main():
     
     print(f"\nTotal Leverkusen matches: {len(leverkusen_match_ids)}")
     
-    # -------------------------------------------------------------------------
-    # Step 3: Check which have 360 data and copy to working folder
-    # -------------------------------------------------------------------------
-    
+    #Validate 360 and copy/move
     print("\n" + "=" * 60)
-    print(f"Copying 360 files to: {OUTPUT_PATH}")
+    print(f"Copying 360 files to: {output_path}")
     print("=" * 60)
     
     # Create output folder
-    OUTPUT_PATH.mkdir(parents=True, exist_ok=True)
+    output_path.mkdir(parents=True, exist_ok=True)
     
     copied = 0
     missing = []
     
     for match_id in leverkusen_match_ids:
-        source = THREE_SIXTY_PATH / f"{match_id}.json"
-        dest = OUTPUT_PATH / f"{match_id}.json"
+        source = threesixty_path / f"{match_id}.json"
+        dest = output_path / f"{match_id}.json"
         
         if source.exists():
             shutil.copy2(source, dest)
@@ -117,10 +108,7 @@ def main():
             print(f"MISSING: {match_id}.json")
             missing.append(match_id)
     
-    # -------------------------------------------------------------------------
-    # Summary
-    # -------------------------------------------------------------------------
-    
+
     print("\n" + "=" * 60)
     print("SUMMARY")
     print("=" * 60)
@@ -131,7 +119,7 @@ def main():
     if missing:
         print(f"\nMissing match IDs: {missing}")
     
-    print(f"\nFiles saved to: {OUTPUT_PATH}")
+    print(f"\nFiles saved to: {output_path}")
 
 
 if __name__ == "__main__":
